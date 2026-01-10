@@ -1,3 +1,12 @@
+/**
+ * Contact Component
+ * 
+ * Contact information section with multiple contact methods.
+ * Displays email, LinkedIn, and GitHub links in card format.
+ * 
+ * @component
+ */
+
 import React from 'react';
 import styled from 'styled-components';
 import { Translations } from '../../i18n/translations';
@@ -85,6 +94,12 @@ const ContactLink = styled.a`
   }
 `;
 
+/**
+ * Props for Contact component
+ * 
+ * @interface ContactProps
+ * @property {Translations} translations - Translation object for current language
+ */
 interface ContactProps {
   translations: Translations;
 }

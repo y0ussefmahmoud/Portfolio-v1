@@ -1,4 +1,14 @@
-import React from 'react';
+/**
+ * Skills Component
+ * 
+ * Displays technical skills organized by category.
+ * Categories: Frontend, Backend, Mobile, Tools
+ * Uses responsive grid layout with skill tags.
+ * 
+ * @component
+ */
+
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Translations } from '../../i18n/translations';
 
@@ -71,6 +81,12 @@ const SkillTag = styled.span`
   font-weight: 500;
 `;
 
+/**
+ * Props for Skills component
+ * 
+ * @interface SkillsProps
+ * @property {Translations} translations - Translation object for current language
+ */
 interface SkillsProps {
   translations: Translations;
 }
@@ -131,4 +147,4 @@ const Skills: React.FC<SkillsProps> = ({ translations }) => {
   );
 };
 
-export default Skills;
+export default memo(Skills);

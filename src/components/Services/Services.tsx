@@ -1,3 +1,17 @@
+/**
+ * Services Component
+ * 
+ * Showcases professional services with animated cards.
+ * Features:
+ * - IntersectionObserver for scroll-triggered animations
+ * - Staggered animation delays for visual appeal
+ * - Service cards with icons, features, and pricing
+ * - Email inquiry functionality with pre-filled templates
+ * - Hover effects and floating animations
+ * 
+ * @component
+ */
+
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Translations } from '../../i18n/translations';
@@ -67,6 +81,13 @@ const ServicesGrid = styled.div`
   }
 `;
 
+/**
+ * Service card with scroll-triggered animation
+ * - Fade-in animation when visible in viewport
+ * - Staggered delay based on card index
+ * - Hover effects with transform and shadow
+ * - Shimmer effect on hover using ::before pseudo-element
+ */
 const ServiceCard = styled.article.withConfig({
   shouldForwardProp: (prop) => !['isVisible', 'index'].includes(prop),
 })<{ isVisible: boolean; index: number }>`
@@ -203,6 +224,12 @@ const ServiceButton = styled.button`
   }
 `;
 
+/**
+ * Props for Services component
+ * 
+ * @interface ServicesProps
+ * @property {Translations} translations - Translation object for current language
+ */
 interface ServicesProps {
   translations: Translations;
 }
@@ -211,13 +238,18 @@ const Services: React.FC<ServicesProps> = ({ translations }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    /**
+     * Triggers animation when services section enters viewport
+     * Uses IntersectionObserver API with 10% threshold
+     * Animation is triggered once and persists
+     */
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 } // Trigger when 10% of section is visible
     );
 
     const section = document.getElementById('services');
@@ -225,6 +257,7 @@ const Services: React.FC<ServicesProps> = ({ translations }) => {
       observer.observe(section);
     }
 
+    // Cleanup observer on component unmount
     return () => observer.disconnect();
   }, []);
 
@@ -315,9 +348,17 @@ const Services: React.FC<ServicesProps> = ({ translations }) => {
     }
   ];
 
+  /**
+   * Opens email client with pre-filled inquiry template
+   * Encodes subject and body for URL safety
+   * 
+   * @param {string} serviceName - Name of the service being inquired about
+   */
   const handleServiceInquiry = (serviceName: string) => {
     const subject = encodeURIComponent(`Inquiry about ${serviceName}`);
-    const body = encodeURIComponent(`Hi Y0ussef,\n\nI'm interested in your ${serviceName} service. Could you please provide more details?\n\nBest regards`);
+    const body = encodeURIComponent(
+      `Hi Y0ussef,\n\nI'm interested in your ${serviceName} service. Could you please provide more details?\n\nBest regards` 
+    );
     window.open(`mailto:youssef11mahmoud112002@gmail.com?subject=${subject}&body=${body}`);
   };
 
@@ -332,7 +373,7 @@ const Services: React.FC<ServicesProps> = ({ translations }) => {
             <ServiceCard 
               key={service.id} 
               isVisible={isVisible}
-              index={index}
+              index={index} // Used for staggered animation delay
             >
               <ServiceIcon>{service.icon}</ServiceIcon>
               <ServiceTitle>{service.title}</ServiceTitle>

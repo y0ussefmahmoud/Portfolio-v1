@@ -1,4 +1,17 @@
-import React from 'react';
+/**
+ * Education Component
+ * 
+ * Displays educational background and certifications.
+ * Features:
+ * - Timeline layout for education history
+ * - Alternating left/right positioning (desktop)
+ * - Certification cards in grid layout
+ * - Responsive design for mobile
+ * 
+ * @component
+ */
+
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Translations } from '../../i18n/translations';
 
@@ -230,6 +243,12 @@ const CertificationDate = styled.p`
   font-size: 0.875rem;
 `;
 
+/**
+ * Props for Education component
+ * 
+ * @interface EducationProps
+ * @property {Translations} translations - Translation object for current language
+ */
 interface EducationProps {
   translations: Translations;
 }
@@ -247,20 +266,6 @@ const Education: React.FC<EducationProps> = ({ translations }) => {
         "Computer Networks, Operating Systems, Computer Architecture"
       ]
     }
-    /*
-    ,
-    {
-      year: "2017 - 2020",
-      institution: "Helwan STEM High School",
-      degree: "High School Diploma - STEM Program",
-      description: "Science, Technology, Engineering, and Mathematics focused education with emphasis on problem-solving and innovation.",
-      achievements: [
-        "STEM Program Graduate with Excellence",
-        "Focus on Mathematics, Physics, and Computer Science",
-        "Participated in Science Olympiad and Programming Competitions"
-      ]
-    }
-    */
   ];
 
   const certifications = [
@@ -270,43 +275,6 @@ const Education: React.FC<EducationProps> = ({ translations }) => {
       date: "2026",
       icon: "🌐"
     }
-    /*
-    ,{
-      name: "Full-Stack Web Development",
-      issuer: "Meta (Facebook)",
-      date: "2023",
-      icon: "🌐"
-    },
-    {
-      name: "React.js Development",
-      issuer: "Meta (Facebook)",
-      date: "2023",
-      icon: "⚛️"
-    },
-    {
-      name: "Node.js Backend Development",
-      issuer: "IBM",
-      date: "2023",
-      icon: "🟢"
-    },
-    {
-      name: "Database Design & Management",
-      issuer: "Oracle",
-      date: "2022",
-      icon: "🗄️"
-    },
-    {
-      name: "Flutter Mobile Development",
-      issuer: "Google",
-      date: "2023",
-      icon: "📱"
-    },
-    {
-      name: "Cloud Computing Fundamentals",
-      issuer: "Amazon Web Services",
-      date: "2023",
-      icon: "☁️"
-    }*/
   ];
 
   return (
@@ -355,4 +323,4 @@ const Education: React.FC<EducationProps> = ({ translations }) => {
   );
 };
 
-export default Education;
+export default memo(Education);

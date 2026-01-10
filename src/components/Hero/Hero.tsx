@@ -1,9 +1,21 @@
+/**
+ * Hero Component
+ * 
+ * Landing section with animated introduction and profile image.
+ * Features:
+ * - Animated text and image with fade-in effects
+ * - Floating profile image with gradient border
+ * - CTA buttons for navigation
+ * - Social media links
+ * - Scroll indicator with animation
+ * - Fallback placeholder for image loading errors
+ * 
+ * @component
+ */
+
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Translations } from '../../i18n/translations';
-// import LazyImage from '../LazyImage/LazyImage';
-// import AnimatedSection from '../Animations/AnimatedSection';
-// import { smoothScrollTo } from '../../utils/smoothScroll';
 
 const fadeInUp = keyframes`
   from {
@@ -381,12 +393,22 @@ const ScrollArrow = styled.div`
   }
 `;
 
+/**
+ * Props for Hero component
+ * 
+ * @interface HeroProps
+ * @property {Translations} translations - Translation object for current language
+ */
 interface HeroProps {
   translations: Translations;
 }
 
 const Hero: React.FC<HeroProps> = ({ translations }) => {
 
+  /**
+   * Smoothly scrolls to the About section
+   * Used by scroll indicator at bottom of hero
+   */
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about');
     if (aboutSection) {
@@ -394,6 +416,10 @@ const Hero: React.FC<HeroProps> = ({ translations }) => {
     }
   };
 
+  /**
+   * Smoothly scrolls to the Projects section
+   * Triggered by "View My Work" CTA button
+   */
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
@@ -401,6 +427,10 @@ const Hero: React.FC<HeroProps> = ({ translations }) => {
     }
   };
 
+  /**
+   * Smoothly scrolls to the Contact section
+   * Triggered by "Get In Touch" CTA button
+   */
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
@@ -465,8 +495,10 @@ const Hero: React.FC<HeroProps> = ({ translations }) => {
               <ProfileImage 
                 src={`${process.env.PUBLIC_URL}/images/hero-800x1000.webp`}
                 alt="Y0ussef Mahmoud - Full-Stack Developer & Project Engineer"
+                loading="lazy"
                 onError={(e) => {
                   console.log('Image failed to load, using placeholder');
+                  // Hide broken image and display emoji placeholder
                   e.currentTarget.style.display = 'none';
                   const placeholder = e.currentTarget.nextElementSibling as HTMLElement;
                   if (placeholder) placeholder.style.display = 'flex';

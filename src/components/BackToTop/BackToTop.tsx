@@ -1,3 +1,12 @@
+/**
+ * BackToTop Component
+ * 
+ * Floating button that appears when user scrolls down.
+ * Smoothly scrolls to top of page when clicked.
+ * 
+ * @component
+ */
+
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -30,14 +39,22 @@ const BackToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    /**
+     * Shows/hides button based on scroll position
+     * Button appears when user scrolls past 300px
+     */
     const handleScroll = () => {
       setIsVisible(window.scrollY > 300);
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Cleanup event listener on unmount
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  /**
+   * Smoothly scrolls page to top
+   */
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

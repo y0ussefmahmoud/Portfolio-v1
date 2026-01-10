@@ -1,8 +1,20 @@
+/**
+ * Projects Component
+ * 
+ * Displays portfolio projects with filtering capabilities.
+ * Features:
+ * - Filter projects by status (All/Completed/In Progress)
+ * - Grouped display by project status
+ * - Project cards with images, tech stack, and action buttons
+ * - Lazy loading images with error handling
+ * - Responsive grid layout
+ * 
+ * @component
+ */
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Translations } from '../../i18n/translations';
-// import EnhancedProjectCard from '../ProjectCard/ProjectCard';
-// import AnimatedSection from '../Animations/AnimatedSection';
 
 const ProjectsSection = styled.section`
   padding: 5rem 0;
@@ -238,6 +250,12 @@ const ActionButton = styled.a<{ variant?: 'primary' | 'secondary' }>`
   `}
 `;
 
+/**
+ * Props for Projects component
+ * 
+ * @interface ProjectsProps
+ * @property {Translations} translations - Translation object for current language
+ */
 interface ProjectsProps {
   translations: Translations;
 }
@@ -255,25 +273,7 @@ const Projects: React.FC<ProjectsProps> = ({ translations }) => {
         image: `${process.env.PUBLIC_URL}/images/My-Portfolio-1200x675.webp`,
         viewLink: 'https://y0ussefmahmoud.github.io/Portfolio/',
         codeLink: 'https://github.com/y0ussefmahmoud/Portfolio'
-      }/*,
-      {
-        id: 2,
-        title: 'Node.js API',
-        description: 'RESTful API with Node.js, Express, JWT auth, and MySQL.',
-        tech: ['Node.js', 'Express', 'JWT', 'MySQL'],
-        image: `${process.env.PUBLIC_URL}/images/node-api-1200x675.webp`,
-        viewLink: '#',
-        codeLink: '#'
-      },
-      {
-        id: 3,
-        title: 'Admin Dashboard',
-        description: 'Responsive dashboard with charts, auth, and role management.',
-        tech: ['React', 'TypeScript', 'Charts', 'Auth'],
-        image: `${process.env.PUBLIC_URL}/images/admin-dashboard-1200x675.webp`,
-        viewLink: '#',
-        codeLink: '#'
-      }*/
+      }
     ],
     inProgress: [
       {
@@ -284,16 +284,25 @@ const Projects: React.FC<ProjectsProps> = ({ translations }) => {
         image: `${process.env.PUBLIC_URL}/images/Y0-Hardware-1200x675.webp`,
         viewLink: '#',
         codeLink: '#'
-      }/*,
+      },
       {
         id: 5,
-        title: 'Flutter App',
-        description: 'Cross‑platform mobile app with clean architecture and REST.',
-        tech: ['Flutter', 'Dart', 'Clean Architecture', 'REST'],
-        image: `${process.env.PUBLIC_URL}/images/flutter-app-1200x675.webp`,
+        title: 'Emg Ems Simulation',
+        description: 'Healthcare app with Flutter and Clean Architecture + IOT system.',
+        tech: ['Flutter', 'Dart', 'Clean Architecture', 'IOT'],
+        image: `${process.env.PUBLIC_URL}/images/Emg-ems.webp`,
         viewLink: '#',
         codeLink: '#'
-      }*/,
+      },
+      {
+        id: 7,
+        title: 'Dubai key website',
+        description: 'Dubai key website is E-commerce website for computer hardware with modern design.',
+        tech: ['React', 'TypeScript', 'E-commerce'],
+        image: `${process.env.PUBLIC_URL}/images/Dubai-key-website.webp`,
+        viewLink: '#',
+        codeLink: '#'
+      }, 
       {
         id: 6,
         title: 'Y0 AI Assistant',
@@ -306,6 +315,12 @@ const Projects: React.FC<ProjectsProps> = ({ translations }) => {
     ]
   };
 
+  /**
+   * Filters projects based on selected filter
+   * Returns object with completed and inProgress arrays
+   * 
+   * @returns {Object} Filtered projects grouped by status
+   */
   const getFilteredProjects = () => {
     if (activeFilter === 'all') {
       return { completed: projectsData.completed, inProgress: projectsData.inProgress };
@@ -360,6 +375,7 @@ const Projects: React.FC<ProjectsProps> = ({ translations }) => {
                       alt={`${project.title} project cover`}
                       loading="lazy"
                       onError={(e) => {
+                        // Hide broken image and show placeholder emoji instead
                         e.currentTarget.style.display = 'none';
                         const placeholder = e.currentTarget.nextElementSibling as HTMLElement;
                         if (placeholder) placeholder.style.display = 'flex';
@@ -420,6 +436,7 @@ const Projects: React.FC<ProjectsProps> = ({ translations }) => {
                       alt={`${project.title} project cover`}
                       loading="lazy"
                       onError={(e) => {
+                        // Hide broken image and show placeholder emoji instead
                         e.currentTarget.style.display = 'none';
                         const placeholder = e.currentTarget.nextElementSibling as HTMLElement;
                         if (placeholder) placeholder.style.display = 'flex';

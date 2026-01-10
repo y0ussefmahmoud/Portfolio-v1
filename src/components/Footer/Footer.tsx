@@ -1,4 +1,13 @@
-import React from 'react';
+/**
+ * Footer Component
+ * 
+ * Simple footer with copyright information and tagline.
+ * Displays current year dynamically.
+ * 
+ * @component
+ */
+
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Translations } from '../../i18n/translations';
 
@@ -14,6 +23,12 @@ const Container = styled.div`
   padding: 0 2rem;
 `;
 
+/**
+ * Props for Footer component
+ * 
+ * @interface FooterProps
+ * @property {Translations} translations - Translation object for current language
+ */
 interface FooterProps {
   translations: Translations;
 }
@@ -29,4 +44,4 @@ const Footer: React.FC<FooterProps> = ({ translations }) => {
   );
 };
 
-export default Footer;
+export default memo(Footer);

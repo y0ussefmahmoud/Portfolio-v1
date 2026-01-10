@@ -1,7 +1,28 @@
+/**
+ * Header Component
+ * 
+ * Main navigation header with responsive design and scroll effects.
+ * Features:
+ * - Fixed position with backdrop blur on scroll
+ * - Active section highlighting based on scroll position
+ * - Mobile hamburger menu with full-screen overlay
+ * - Theme toggle (dark/light mode)
+ * - Language switcher (English/Arabic)
+ * - Smooth scroll navigation to sections
+ * 
+ * @component
+ */
+
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Translations } from '../../i18n/translations';
 
+/**
+ * Fixed header with dynamic styling based on scroll position
+ * - Transparent background when at top
+ * - Backdrop blur and border when scrolled
+ * - Smooth transitions between states
+ */
 const HeaderContainer = styled.header<{ isScrolled: boolean }>`
   position: fixed;
   top: 0;
@@ -19,6 +40,7 @@ const HeaderContainer = styled.header<{ isScrolled: boolean }>`
   z-index: 1000;
   transition: all 0.3s ease;
   padding: ${props => props.isScrolled ? '0.75rem 0' : '1rem 0'};
+  will-change: background-color, backdrop-filter, border-color;
 `;
 
 const HeaderInner = styled.div`
@@ -65,6 +87,12 @@ const Logo = styled.a`
   }
 `;
 
+/**
+ * Mobile navigation overlay
+ * - Full-screen menu on mobile devices
+ * - Slide-in animation from left
+ * - Hidden by default, shown when isOpen is true
+ */
 const Nav = styled.nav<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
@@ -215,6 +243,16 @@ const CloseButton = styled.button`
   }
 `;
 
+/**
+ * Props for the Header component
+ * 
+ * @interface HeaderProps
+ * @property {boolean} isDarkMode - Current theme state (true for dark mode)
+ * @property {'en' | 'ar'} language - Current language setting
+ * @property {() => void} onToggleTheme - Callback to toggle theme
+ * @property {() => void} onToggleLanguage - Callback to toggle language
+ * @property {Translations} translations - Translation object for current language
+ */
 interface HeaderProps {
   isDarkMode: boolean;
   language: 'en' | 'ar';
@@ -235,10 +273,19 @@ const Header: React.FC<HeaderProps> = ({
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
+    /**
+     * Updates header style when user scrolls past 50px threshold
+     * Adds backdrop blur and border for better visibility on scroll
+     */
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
+    /**
+     * Tracks which section is currently in viewport
+     * Updates active navigation link based on scroll position
+     * Uses 100px offset to account for fixed header height
+     */
     const handleSectionChange = () => {
       const sections = ['home', 'about', 'skills', 'services', 'projects', 'education', 'contact'];
       const scrollPosition = window.scrollY + 100;
@@ -247,6 +294,7 @@ const Header: React.FC<HeaderProps> = ({
         const element = document.getElementById(section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
+          // Check if current scroll position is within section bounds
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(section);
             break;
@@ -255,8 +303,8 @@ const Header: React.FC<HeaderProps> = ({
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('scroll', handleSectionChange);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleSectionChange, { passive: true });
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -264,6 +312,12 @@ const Header: React.FC<HeaderProps> = ({
     };
   }, []);
 
+  /**
+   * Smoothly scrolls to a specific section by ID
+   * Closes mobile menu after navigation
+   * 
+   * @param {string} sectionId - The ID of the target section element
+   */
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {

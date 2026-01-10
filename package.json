@@ -20,11 +20,15 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
-    "gh-pages": "^6.3.0"
+    "gh-pages": "^6.3.0",
+    "rimraf": "^5.0.10"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "clean": "rimraf build static",
+    "prebuild": "npm run clean",
+    "build": "react-scripts build && npm run copy-static",
+    "copy-static": "node -e \"require('fs').cpSync('build/static', 'static', {recursive: true})\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

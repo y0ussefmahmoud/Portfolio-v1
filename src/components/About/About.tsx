@@ -1,4 +1,13 @@
-import React from 'react';
+/**
+ * About Component
+ * 
+ * Simple section displaying personal bio and introduction.
+ * Uses centered layout with title and description text.
+ * 
+ * @component
+ */
+
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Translations } from '../../i18n/translations';
 
@@ -30,6 +39,12 @@ const Description = styled.p`
   margin: 0 auto;
 `;
 
+/**
+ * Props for About component
+ * 
+ * @interface AboutProps
+ * @property {Translations} translations - Translation object for current language
+ */
 interface AboutProps {
   translations: Translations;
 }
@@ -45,4 +60,4 @@ const About: React.FC<AboutProps> = ({ translations }) => {
   );
 };
 
-export default About;
+export default memo(About);
