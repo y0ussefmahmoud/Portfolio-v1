@@ -43,7 +43,7 @@ npm run deploy
 
 ## 🌐 Your Live Site
 After deployment, your portfolio will be available at:
-**https://y0ussefmahmoud.github.io/Portfolio/**
+**https://y0ussefmahmoud.github.io/Portfolio-v1/**
 
 ## 🔄 Automatic Deployment
 - Every push to `main` branch will automatically trigger deployment

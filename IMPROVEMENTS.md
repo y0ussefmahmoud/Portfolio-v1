@@ -82,7 +82,7 @@ This document outlines all the performance, accessibility, and SEO improvements 
 ```txt
 User-agent: *
 Allow: /
-Sitemap: https://y0ussefmahmoud.github.io/Portfolio/sitemap.xml
+Sitemap: https://y0ussefmahmoud.github.io/Portfolio-v1/sitemap.xml
 ```
 
 #### `public/sitemap.xml`

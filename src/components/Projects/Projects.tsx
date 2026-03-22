@@ -271,8 +271,8 @@ const Projects: React.FC<ProjectsProps> = ({ translations }) => {
         description: 'My Portfolio with Html, Css & JavaScript.',
         tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive'],
         image: `${process.env.PUBLIC_URL}/images/My-Portfolio-1200x675.webp`,
-        viewLink: 'https://y0ussefmahmoud.github.io/Portfolio/',
-        codeLink: 'https://github.com/y0ussefmahmoud/Portfolio'
+        viewLink: 'https://y0ussefmahmoud.github.io/Portfolio-v1/',
+        codeLink: 'https://github.com/y0ussefmahmoud/Portfolio-v1'
       }
     ],
     inProgress: [
