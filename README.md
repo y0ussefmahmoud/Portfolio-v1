@@ -1,6 +1,10 @@
-# Y0ussef Mahmoud - Portfolio Website (React.js)
+# Y0ussef Mahmoud - Portfolio Website V1.9.4 (React.js)
 
 A modern, responsive portfolio website built with **React.js** and **TypeScript**, showcasing my skills and projects as a Full-Stack Developer.
+
+## Version
+
+**Current Version: V1.9.4** - Latest release with enhanced features and improvements.
 
 ## Features
 
